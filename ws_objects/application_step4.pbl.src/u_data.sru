@@ -29,6 +29,7 @@ public subroutine of_fill_address (datawindowchild adw)
 public subroutine of_fill_article (datawindowchild adw)
 public subroutine of_fill_order (datawindow adw)
 public subroutine of_fill_order_detail (datawindow adw)
+public subroutine of_fill_search (datawindow adw, long al_id[], string as_text[])
 end prototypes
 
 public subroutine of_fill_address (datawindow adw);long ll_i
@@ -77,17 +78,20 @@ for ll_i = 1 to upperbound(il_article_number)
 next
 end subroutine
 
-public subroutine of_fill_order (datawindow adw);long ll_i
+public subroutine of_fill_order (datawindow adw);long ll_i, ll_address
 
 for ll_i = 1 to 50
 	adw.insertrow(0)
 	
+	ll_address = rand(upperbound(il_address_number))
 	adw.setitem(ll_i, 'order_date', relativedate(today(), - rand(60)))
-	adw.setitem(ll_i, 'address', il_address_number[rand(upperbound(il_address_number))])
+	adw.setitem(ll_i, 'address', il_address_number[ll_address])
+	
+	adw.setitem(ll_i, 'address_search', string(il_address_number[ll_address]) + ' ' + is_address_name[ll_address])
 next
 end subroutine
 
-public subroutine of_fill_order_detail (datawindow adw);long ll_i, ll_max, ll_art, ll_amount
+public subroutine of_fill_order_detail (datawindow adw);long ll_i, ll_j, ll_max, ll_art, ll_amount
 
 ll_max = rand(30)
 
@@ -100,6 +104,17 @@ for ll_i = 1 to ll_max
 	ll_amount = rand(5)
 	adw.setitem(ll_i, 'amount', ll_amount)
 	adw.setitem(ll_i, 'sum', ll_amount * ide_article_price[ll_art])
+	adw.setitem(ll_i, 'article_search', string(il_article_number[ll_art]) + ' ' + is_article_description[ll_art])
+next
+end subroutine
+
+public subroutine of_fill_search (datawindow adw, long al_id[], string as_text[]);long ll_i
+
+adw.reset()
+for ll_i = 1 to upperbound(al_id)
+	adw.insertrow(ll_i)
+	adw.setitem(ll_i, 'id', al_id[ll_i])
+	adw.setitem(ll_i, 'text', as_text[ll_i])
 next
 end subroutine
 

@@ -12,6 +12,10 @@ end forward
 
 global variables
 w_main gw_main
+
+datawindow idw_search
+dwobject idwo_search
+string is_data_search
 end variables
 global type application_step4 from application
 string appname = "application_step4"

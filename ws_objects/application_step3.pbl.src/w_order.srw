@@ -79,9 +79,9 @@ cb_close.x = workspacewidth() - cb_close.width - 4
 end event
 
 type cb_close from commandbutton within w_order
-integer x = 2000
+integer x = 2002
 integer y = 4
-integer width = 140
+integer width = 142
 integer height = 108
 integer taborder = 30
 integer textsize = -12

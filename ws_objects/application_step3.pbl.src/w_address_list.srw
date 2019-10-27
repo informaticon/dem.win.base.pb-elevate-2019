@@ -29,6 +29,7 @@ type variables
 u_data iu_data
 w_address_detail iw_detail
 end variables
+
 on w_address_list.create
 this.cb_close=create cb_close
 this.dw_list=create dw_list
@@ -84,6 +85,8 @@ integer height = 2244
 integer taborder = 20
 string title = "none"
 string dataobject = "d_address_list"
+boolean hscrollbar = true
+boolean vscrollbar = true
 boolean livescroll = true
 end type
 
